@@ -34,6 +34,17 @@
     # '')
   ];
 
+  programs.ripgrep = {
+    enable = true;
+    arguments = [
+      "--glob"
+      "!.git/*"
+      "!.jj/*"
+      "!node_modules/*"
+
+      "--hidden"
+    ];
+  };
     #package = pkgs.go;
     # these are interpreted relative to $HOME
     #goPath = "gopath";

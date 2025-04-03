@@ -30,7 +30,7 @@
     # amnesshia = "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no";
 
     s    = "git status";
-    s. = "git status .";
+    "s." = "git status .";
     ap   = "git add -p";
     glo = "git log --oneline";
     gss = "git show --stat";
