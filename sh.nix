@@ -43,7 +43,7 @@
   };
   home.sessionVariables = {
     # EDITOR = "emacs";
-    PATH = "/home/mark/bin:$PATH";
+    PATH = "/home/mark/bin:/usr/local/go/bin:$PATH";
     TMPDIR = "/tmp";
     GOPRIVATE = "github.com/Contrast-Security-Inc/*";
   };

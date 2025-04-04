@@ -51,11 +51,11 @@
   #   # '')
   # ];
 
-imports = [
-  ./sh.nix
-  ./pkgs.nix
-  ./git.nix
-];
+  imports = [
+    ./sh.nix
+    ./pkgs.nix
+    ./git.nix
+  ];
 
 
   #   #package = pkgs.go;
