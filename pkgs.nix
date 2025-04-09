@@ -39,8 +39,8 @@
     arguments = [
       "--glob"
       "!.git/*"
-      "!.jj/*"
-      "!node_modules/*"
+      # "!.jj/*"
+      # "!node_modules/*"
 
       "--hidden"
     ];

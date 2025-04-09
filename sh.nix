@@ -27,6 +27,7 @@
     diff = "diff -uw";
     cdiff = "colordiff -uw";
     hd = "hexdump -C";
+    lls = "ll";
     # amnesshia = "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no";
 
     s    = "git status";
@@ -38,12 +39,12 @@
     gitk = "gitk &";
     goupdate = "echo -e \"run:\n  go install golang.org/dl/go1.21.3@latest\n  go1.21.3 download\"";
     rebuild_go_agent = "(cd ~/work/go-agent && make install)";
-
+    hms = "home-manager switch";
 
   };
   home.sessionVariables = {
     # EDITOR = "emacs";
-    PATH = "/home/mark/bin:/usr/local/go/bin:$PATH";
+    PATH = "/home/mark/bin:/home/mark/go/bin:/usr/local/go/bin:$PATH";
     TMPDIR = "/tmp";
     GOPRIVATE = "github.com/Contrast-Security-Inc/*";
   };
