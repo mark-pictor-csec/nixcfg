@@ -46,7 +46,8 @@
     # EDITOR = "emacs";
     PATH = "/home/mark/bin:/home/mark/go/bin:/usr/local/go/bin:$PATH";
     TMPDIR = "/tmp";
-    GOPRIVATE = "github.com/Contrast-Security-Inc/*";
+    # now set in /home/mark/.config/go/env
+    # GOPRIVATE = "github.com/Contrast-Security-Inc/*";
   };
   programs.bash.enable = true;
 }

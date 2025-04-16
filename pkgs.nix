@@ -8,7 +8,6 @@
     pkgs.wget
     pkgs.vim
     pkgs.vscode
-    # pkgs.git
     pkgs.openssh
     pkgs.gnumake
     #pkgs.gcc #conflicts with clang :/
@@ -16,7 +15,6 @@
     pkgs.rustup
     pkgs.htop
     pkgs.nil
-    pkgs.go
     pkgs.ripgrep
     pkgs.jq
 
@@ -34,27 +32,26 @@
     # '')
   ];
 
+  programs.starship = import ./starship.nix { inherit pkgs lib; };
+
   programs.ripgrep = {
     enable = true;
     arguments = [
       "--glob"
       "!.git/*"
-      # "!.jj/*"
-      # "!node_modules/*"
-
       "--hidden"
     ];
   };
-    #package = pkgs.go;
-    # these are interpreted relative to $HOME
-    #goPath = "gopath";
-    #goBin = "gobin";
-    # TODO: it'd be nice if this is only set on work machines but that'd take a
-    # refactor
+
   programs.go = {
-    enable = true;
+    enable = false;
     goPrivate = [
       "github.com/Contrast-Security-Inc/*"
     ];
+  };
+  home.file = {
+    ".config/go/env".text = ''
+    GOPRIVATE=github.com/Contrast-Security-Inc/*
+    '';
   };
 }
