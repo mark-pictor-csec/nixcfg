@@ -17,6 +17,8 @@
     pkgs.nil
     pkgs.ripgrep
     pkgs.jq
+    pkgs.file
+    pkgs.binwalk
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -32,7 +34,7 @@
     # '')
   ];
 
-  programs.starship = import ./starship.nix { inherit pkgs lib; };
+  programs.starship = import ./starship.nix { inherit pkgs ; };
 
   programs.ripgrep = {
     enable = true;

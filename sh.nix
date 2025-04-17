@@ -38,16 +38,21 @@
     gca = "git commit --amend --no-edit";
     gitk = "gitk &";
     goupdate = "echo -e \"run:\n  go install golang.org/dl/go1.21.3@latest\n  go1.21.3 download\"";
-    rebuild_go_agent = "(cd ~/work/go-agent && make install)";
+    rebuild_go_agent = "echo use rga";
+    rga = "(cd ~/work/go-agent && make install)";
     hms = "home-manager switch";
 
   };
   home.sessionVariables = {
     # EDITOR = "emacs";
-    PATH = "/home/mark/bin:/home/mark/go/bin:/usr/local/go/bin:$PATH";
+    PATH = "/home/mark/bin:/home/mark/go/bin:/home/mark/sdk/latestgo/bin:/usr/local/go/bin:$PATH";
     TMPDIR = "/tmp";
     # now set in /home/mark/.config/go/env
     # GOPRIVATE = "github.com/Contrast-Security-Inc/*";
   };
   programs.bash.enable = true;
+  programs.zsh.enable = true;
+
+  programs.bash.initExtra =  (builtins.readFile ./sh.rc);
+  programs.zsh.initExtra = (builtins.readFile ./sh.rc);
 }

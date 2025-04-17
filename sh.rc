@@ -1,0 +1,67 @@
+# sh.rc: additional shell functions for bashrc / zshrc
+
+cdl () {
+  cd "$(dirname "$(readlink "$1")")"; 
+}
+
+# git log oneline, limited to commits on current (or specified) branch but not on default branch (next/main/etc)
+glol(){
+  tgt="${1:-HEAD}"
+  git log --oneline $(git dbranch)..$tgt
+}
+
+# jump to another dir
+j(){
+  [[ $# -ne 1 ]] && echo -e "j: 1 arg required:\n$(jq -C < ~/.j)" && return 1
+  local d=$(envsubst <<<$(jq -r .$1 ~/.j 2>/dev/null)); if [[ $? -eq 0 ]] && [[ -n "$d" ]]; then cd $d; fi
+}
+pj(){
+  [[ $# -ne 1 ]] && echo -e "j: 1 arg required:\n$(jq -C < ~/.j)" && return 1
+  local d=$(envsubst <<<$(jq -r .$1 ~/.j 2>/dev/null)); if [[ $? -eq 0 ]] && [[ -n "$d" ]]; then pushd $d; fi
+}
+
+# show largest subdirs
+big() {
+  d=$1
+  if [[ "$d" == "" ]]; then
+    d=$PWD
+  fi
+  du -sh $d/* | sort -rh | head -n5
+}
+
+# JSON pretty print with jq
+jpp() {
+  [[ "$1" == "" ]] && echo "missing arg" && return
+  _pp=$(mktemp)
+  jq . <$1 >$_pp && mv $_pp $1 || rm -f $_pp
+  unset _pp
+}
+
+#add new group to your groups, without logout
+updategroup(){
+  if [[ -z "$1" ]]; then
+    echo "group required"
+    return 1
+  fi
+  exec sg $1 newgrp $(id -gn)
+}
+
+
+#need an ansi color code?
+colors(){
+  echo -n fg
+  for c in `seq 0 20`; do printf "%s%4d" $(tput setaf $c) $c; done; tput sgr0; echo
+  echo -n bg
+  for c in `seq 0 20`; do printf "%s%4d" $(tput setab $c) $c; done; tput sgr0; echo
+}
+
+# pprof doesn't play nice with being in background
+htpprof(){
+  if [[ $# -eq 0 ]]; then
+    echo requires at least 1 arg
+    return 1
+  fi
+  go tool pprof -http : $@ </dev/zero &
+}
+
+[[ -e ~/.sensitive ]] && source ~/.sensitive
